@@ -1,18 +1,62 @@
 function buy(store) {
-    let cost;
-    let bank;
+    let cost = parseInt(store.getAttribute("cost"));
+    let bank = parseInt(score.innerHTML);
+
+    // Break if not enough points to buy
+    if (bank < cost) return;
+
+    changeScore(-1 * cost);
+
+    let widget = document.createElement("div");
+    widget.className = "widget";
+    fillWidget(store, widget);
+
+    widget.onclick = () => {
+        harvest(widget);
+    }
+
+    document.getElementById("widget-container").appendChild(widget);
 
 }
 
 function harvest(widget) {
+    // Only run if currently not harvesting
+    if (widget.getAttribute("harvesting")) return;
+
+    // Set harvesting flag
+    widget.setAttribute("harvesting", "");
+
+    if (widget.getAttribute("auto") != 'true') {
+        changeScore(widget.getAttribute("reap"));
+        showPoint(widget);
+    }
 
     setTimeout(() => {
+        // Remove the harvesting flag
+        widget.removeAttribute("harvesting");
 
-    }, 1000);
+        // Collect points if automatic
+        if (widget.getAttribute("auto") == 'true') {
+            changeScore(widget.getAttribute("reap"));
+            showPoint(widget);
+        }
+    }, parseFloat(widget.getAttribute("cooldown")) * 1000);
 }
 
 function changeScore(amount) {
+    score.innerHTML = parseInt(score.innerHTML) + parseInt(amount);
 
+    for (let store of stores) {
+        let cost = parseInt(store.getAttribute("cost"));
+        let bank = parseInt(score.innerHTML);
+
+        // Display overlay if broke
+        if (cost <= bank) {
+            store.removeAttribute("broke");
+        } else {
+            store.setAttribute("broke", "");
+        }
+    }
 }
 
 function showPoint(widget) {
