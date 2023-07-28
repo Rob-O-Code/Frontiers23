@@ -16,12 +16,12 @@ function buy(store) {
     }
 
     document.getElementById("widget-container").appendChild(widget);
-
+    if (widget.getAttribute("auto") == 'true') harvest(widget);
 }
 
 function harvest(widget) {
     // Only run if currently not harvesting
-    if (widget.getAttribute("harvesting")) return;
+    if (widget.hasAttribute("harvesting")) return;
 
     // Set harvesting flag
     widget.setAttribute("harvesting", "");
@@ -39,6 +39,7 @@ function harvest(widget) {
         if (widget.getAttribute("auto") == 'true') {
             changeScore(widget.getAttribute("reap"));
             showPoint(widget);
+            harvest(widget);
         }
     }, parseFloat(widget.getAttribute("cooldown")) * 1000);
 }
@@ -60,5 +61,13 @@ function changeScore(amount) {
 }
 
 function showPoint(widget) {
-
+    let number = document.createElement("span");
+    number.className = "point";
+    number.innerHTML = "+" + widget.getAttribute("reap");
+    number.style.left = "50%";
+    number.style.top = "50%";
+    number.onanimationend = () => {
+        widget.removeChild(number);
+    }
+    widget.appendChild(number);
 }
