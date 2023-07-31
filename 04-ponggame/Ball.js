@@ -20,7 +20,8 @@ class Ball {
     }
 
     move() {
-        // CODE HERE
+        this.x += this.vx;
+        this.y += this.vy;
     }
 
     bounceWall() {

@@ -9,11 +9,20 @@ class Paddle {
     }
 
     draw(ctx) {
-        // CODE HERE
+        ctx.fillStyle = this.c;
+        ctx.strokeStyle = "black";
+
+        ctx.fillRect(this.x, this.y, this.w, this.l);
+        ctx.strokeRect(this.x, this.y, this.w, this.l);
     }
 
     move() {
-        // CODE HERE
+        let newY = this.y + this.vy;
+
+        if (newY < 0) return;
+        if (newY + this.l > boardHeight) return;
+
+        this.y = newY;
     }
 
     moveCPU(ball) {

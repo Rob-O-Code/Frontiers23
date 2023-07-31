@@ -22,12 +22,14 @@ function resetGame() {
     gameboard.height = boardHeight;
     
     resetBall();
+    resetPaddles();
 
     nextTick(); // start running the clock
 }
 
 function resetPaddles() {
-    // CODE HERE
+    paddleL = new Paddle(0, 0, paddleLength, paddleWidth, "red");
+    paddleR = new Paddle(boardWidth-paddleWidth, 0, paddleLength, paddleWidth, "blue");
 }
 
 function resetBall() {
@@ -43,6 +45,8 @@ function draw() {
     clearBoard();
     
     ball.draw(ctx);
+    paddleL.draw(ctx);
+    paddleR.draw(ctx);
 }
 
 let intervalID;
@@ -50,16 +54,16 @@ let intervalID;
 function nextTick() {
     intervalID = setTimeout(
         () => {
-            //paddleL.move();
+            paddleL.move();
             if (cpucheck.checked) {
-                //paddleR.moveCPU(ball);
+                paddleR.moveCPU(ball);
             } else {
-                //paddleR.move();
+                paddleR.move();
             }
 
             ball.bounceWall();
-            //if (ball.bouncePaddleL(paddleL)) score("right");
-            //if (ball.bouncePaddleR(paddleR)) score("left");
+            if (ball.bouncePaddleL(paddleL)) score("right");
+            if (ball.bouncePaddleR(paddleR)) score("left");
             
             ball.move();
 
@@ -73,7 +77,8 @@ function score(player) {
     if (player == "left") scoreL++;
     if (player == "right") scoreR++;
     
-    // CODE HERE
+    updateScore();
+    resetBall();
 }
 
 function updateScore() {
