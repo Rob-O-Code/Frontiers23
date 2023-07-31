@@ -21,7 +21,7 @@ function resetGame() {
     gameboard.width = boardWidth;
     gameboard.height = boardHeight;
     
-    // CODE HERE
+    resetBall();
 
     nextTick(); // start running the clock
 }
@@ -31,7 +31,7 @@ function resetPaddles() {
 }
 
 function resetBall() {
-    // CODE HERE
+    ball = new Ball(boardWidth/2, boardHeight/2, 1, -1, ballRadius, "hotpink");
 }
 
 function clearBoard() {
@@ -42,7 +42,7 @@ function clearBoard() {
 function draw() {
     clearBoard();
     
-    // CODE HERE
+    ball.draw(ctx);
 }
 
 let intervalID;
@@ -50,16 +50,16 @@ let intervalID;
 function nextTick() {
     intervalID = setTimeout(
         () => {
-            paddleL.move();
+            //paddleL.move();
             if (cpucheck.checked) {
-                paddleR.moveCPU(ball);
+                //paddleR.moveCPU(ball);
             } else {
-                paddleR.move();
+                //paddleR.move();
             }
 
             ball.bounceWall();
-            if (ball.bouncePaddleL(paddleL)) score("right");
-            if (ball.bouncePaddleR(paddleR)) score("left");
+            //if (ball.bouncePaddleL(paddleL)) score("right");
+            //if (ball.bouncePaddleR(paddleR)) score("left");
             
             ball.move();
 
