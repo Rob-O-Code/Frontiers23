@@ -28,4 +28,28 @@ class NWSGetForecast {
     getCurrentCondition() {
         return this.json.properties.periods[0].shortForecast;
     }
+
+    getHighLow() {
+        let output = {high : null, low : null};
+        let isFirstDaytime = this.json.properties.periods[0].isDaytime;
+        if (isFirstDaytime) {
+            output.high = this.json.properties.periods[0].temperature;
+            output.low = this.json.properties.periods[1].temperature;
+        } else {
+            output.low = this.json.properties.periods[0].temperature;
+            output.high = this.json.properties.periods[1].temperature;
+        }
+        return output;
+    }
+
+    getPrecipitation() {
+        let output = {};
+
+        output.chance = this.json.properties.periods[4].probabilityOfPrecipitation.value;
+        if (output.chance == null) {
+            output.chance = 0;
+        }
+
+        return output;
+    }
 }
