@@ -66,7 +66,7 @@ function displayForecast() {
 
     const headerColText = ["Time", "Temperature", "Condition", "Humidity", "Icon"];
     var header = document.createElement('tr');
-    for (var j = 0; j < 5; j++) { // number of columns
+    for (var j = 0; j < headerColText.length; j++) { // number of columns
         var cell = document.createElement('th');
         cell.textContent = headerColText[j];
         header.appendChild(cell);
@@ -79,7 +79,7 @@ function displayForecast() {
         table.appendChild(row);
     }
 
-    for (let i = 0; i < 5; i++) { // up to 40
+    for (let i = 0; i < owmForecast.json.list.length; i++) { // up to 40
         var row = createRow(owmForecast.json.list[i]);
         table.appendChild(row);
     }
