@@ -1,5 +1,7 @@
 # Frontiers23
 
+Robbie Oleynick, WPI ECE/CS '24 (rpoleynick@wpi.edu)
+
 Welcome to the class project GitHub! As we complete projects, the code in this repository will be updated. If you fall behind, or something isn't working right, navigate to this repository on your computer and run `git pull`.
 
 ## Git Essential Commands
@@ -53,7 +55,7 @@ Project improvement ideas:
 The `owmapi` project will show how websites can access data from server endpoints. Using the free API service from [OpenWeather](https://openweathermap.org), a location can be geocoded to find the coordinates, and the coordinates can be queried to receive the current and forecasted weather.
 
 > [!NOTE]
-> The APIKEY constant in `display.js` must be set to a user-generated API key from https://home.openweathermap.org/api_keys. This grants access to current weather, 5 day, 3 hour forecasts, geocoding, and air quality reports.
+> The APIKEY constant in `display.js` must be set to a user-generated API key from https://home.openweathermap.org/api_keys. This grants access to current weather, 5 day, 3 hour forecasts, geocoding, and air quality reports. A class API key is currently load, but will be deactivated in the future.
 
 The starter code includes 4 sets of fake API calls in `testjson`, which are used when the test buttons are pressed in the developer toolbar at the top of the page.
 
